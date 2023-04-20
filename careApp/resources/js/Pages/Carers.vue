@@ -8,7 +8,7 @@
         </div>
 
         <ul class="list-group">
-            <li class="list-group-item" v-for="user in users">{{ user.name }}</li>  
+            <li class="list-group-item" @click="someFunction" v-for="user in users">{{ user.name }}</li>  
         </ul>
 
         <a href="/" class="btn btn-primary">Go home</a>
@@ -30,6 +30,12 @@ export default {
         users: {
             required: true,
             type: Array
+        }
+    },
+
+    methods: {
+        someFunction() {
+            alert('i was clicked!');
         }
     },
 
