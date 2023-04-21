@@ -154,13 +154,13 @@ const submit = () => {
                 <div class="mt-2 flex flex-row">
                     <div class="mr-6">
                         <label for="Caretaker" class="inline-flex items-center block font-medium text-md text-black-700" style="font-family:serif;">
-                            <input id="male" type="radio" class="form-radio" value="caretaker" v-model="form.role">
+                            <input id="male" type="radio" class="form-radio" value="Care taker" v-model="form.role">
                             <span class="ml-2">Care Taker</span>
                         </label>
                     </div>
                     <div>
                         <label for="Patient" class="inline-flex items-center block font-medium text-md text-black-700" style="font-family:serif;">
-                            <input id="female" type="radio" class="form-radio" value="patient" v-model="form.role">
+                            <input id="female" type="radio" class="form-radio" value="Patient" v-model="form.role">
                             <span class="ml-2">Patient</span>
                         </label>
                     </div>

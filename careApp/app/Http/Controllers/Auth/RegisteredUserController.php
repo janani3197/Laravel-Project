@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\address;
+use App\Http\Requests\StoreUserRequest;
+use App\Models\Address;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -30,39 +31,16 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreUserRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'address' => 'required',
-            'address_line_2' => 'required',
-            'city'=> 'required',
-            'postcode'=> 'required',
-            'role' => 'required|in:caretaker,patient'
-
-
-        ]);
-
-
-        $address = address::create([
-            'address' => $request->address,
-            'address_line_2' => $request->address_line_2,
-            'city' => $request->city,
-            'postcode' => $request->postcode,
+        $params = $request->validated();
+        $address = Address::create($params);
+        $user = User::create($params + [
+            'address_id' => $address->id,
             
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $request->role, 
-            'address_id' => $address->id,
-        ]);
-
-
+        $user->assignRole($params['role']);
 
         event(new Registered($user));
 

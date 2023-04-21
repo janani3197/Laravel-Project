@@ -15,9 +15,9 @@ class PatientController extends Controller
      */
     public function index()
     {  
-        $caretakers = Auth::user()->getNearbyCaretakers();
+        // $caretakers = Auth::user()->getNearbyCaretakers();
         
-        return view('patient.booking', ['city' => $city]);
+        // return view('patient.booking', ['city' => $city]);
     }
 
     /**

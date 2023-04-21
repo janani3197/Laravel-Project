@@ -24,7 +24,17 @@ use Inertia\Inertia;
 Route::middleware('auth')->group(function () {
     Route::get('/patient', [CareTakerController::class, 'index'])->name('dashboard');
     Route::get('/patient/booking', [PatientController::class, 'index'])->name('patient.booking');
+
+    // Route::get('my-address', function (Request $request) {
+    //     return Auth::user()->address;
+    // });
     
+    // Expects a BookingPolicy to exist, having a 'create' function (ability)
+    // in that function: return $user->can('bookings.create');
+    // 
+    // Route::post('/bookings', [BookingController::class, 'store'])
+    //     ->name('bookings.store')
+    //     ->can('create', Booking::class);
 });
 
 Route::get('/dashboard', function () {
