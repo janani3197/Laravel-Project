@@ -22,9 +22,9 @@ class PatientController extends Controller
         // $CaretakerInfo = $caretakers->first();
         
         // return Inertia::render('NewBooking', ['CaretakerInfo' => $CaretakerInfo]);
-        // return Inertia::render('New Booking Dashboard');
+        return Inertia::render('New Booking Dashboard');
         // return view($caretakers);
-        return view('test');
+        // return view('test');
     }
 
     /**
