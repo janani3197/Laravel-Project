@@ -69,6 +69,8 @@ class User extends Authenticatable
         return $this->belongsTo(Address::class);
     }
 
+
+
     public function getCarerTakersInSameCity()
     {
         $city = Auth::user()->address->city;
@@ -83,5 +85,11 @@ class User extends Authenticatable
         //     ->get([
         //         'name'
         //     ]);
+    }
+
+
+    public function Booking()
+    {
+        return $this->hasMany(Booking::class);
     }
 }

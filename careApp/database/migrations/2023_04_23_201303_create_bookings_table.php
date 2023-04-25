@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->date('Booked_date');
+            $table->foreignId('user_id');
 
             // TODO: Link the booking to a given user (patient) (see 'forgeignIdFor')
             // TODO: Need a way of capturing when the booking is scheduled for
