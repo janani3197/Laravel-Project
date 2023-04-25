@@ -1,20 +1,21 @@
 <template>
 
-    <div class="container">
-        <div class="alert alert-info">
-            <h1>
-                Message: {{ message }}
-            </h1>
-        </div>
+<!-- <Head title="Dashboard" /> -->
+<AuthenticatedLayout>
+    <h1><center>WELCOME TO BOOKCARE</center></h1>
+    <h3><center>What do you want to do today?</center></h3>
 
-        <ul class="list-group">
-            <li class="list-group-item" @click="someFunction" v-for="user in users">{{ user.name }}</li>  
-        </ul>
 
-        <a href="/" class="btn btn-primary">Go home</a>
+    <div class="d-grid gap-2 col-2 mx-auto">
+      <!-- // routes for new booking -->
+      <a @click="newBooking" href="{{ route('patient.booking') }}" class="btn btn-primary" type="button">
+        New Booking</a>
+
+      <a @click="newBooking" href="{{ route('patient.booking') }}" class="btn btn-primary" type="button">
+        Manage Booking</a>
     </div>
 
-
+</AuthenticatedLayout>
 </template>
 
 <script>

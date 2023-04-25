@@ -35,10 +35,9 @@ class RegisteredUserController extends Controller
     {
         $params = $request->validated();
         $address = Address::create($params);
-        $user = User::create($params + [
-            'address_id' => $address->id,
-            
-        ]);
+        $user = $address->user()->create([
+            'password' => Hash::make($params['password'])
+        ] + $params);        
 
         $user->assignRole($params['role']);
 

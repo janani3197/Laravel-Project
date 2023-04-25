@@ -18,8 +18,10 @@ class RoleSeeder extends Seeder
        $patient = Role::create(['name' => 'Patient' ]);
 
        Permission::create(['name' => 'bookings.create']);
+       Permission::create(['name' => 'bookings.care']);
 
     //    $patient->givePermissionTo(Permission::Newbooking());
        $patient->givePermissionTo('bookings.create');
+       $caretaker->givePermissionTo('bookings.care');
     }
 }

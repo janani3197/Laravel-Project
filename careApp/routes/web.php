@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CareTakerController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Booking;
 use App\Models\CareTaker;
 use App\Models\User;
 use Illuminate\Foundation\Application;
@@ -22,8 +24,11 @@ use Inertia\Inertia;
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/patient', [CareTakerController::class, 'index'])->name('dashboard');
+    // Route::get('/patient', [CareTakerController::class, 'index'])->name('dashboard');
     Route::get('/patient/booking', [PatientController::class, 'index'])->name('patient.booking');
+
+    // Check the docs for the verb / action
+    // Route::post('bookings', [BookingController::class, 'store'])->name('bookings.store');
 
     // Route::get('my-address', function (Request $request) {
     //     return Auth::user()->address;
@@ -37,9 +42,31 @@ Route::middleware('auth')->group(function () {
     //     ->can('create', Booking::class);
 });
 
+// Once logged in, redirect the user to the right dashboard!
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    if (Auth::user()->hasRole('Care taker'))
+        return redirect()->route('dashboard.carer');
+
+    if (Auth::user()->hasRole('Patient'))
+        return redirect()->route('dashboard.patient');
+
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Patient dashboard
+Route::get('/dashboard/patient', function () {
+    return Inertia::render('Dashboard');
+})
+    ->name('dashboard.patient')
+    ->can('create', Booking::class);
+    
+
+// Carer
+Route::get('/dashboard/carer', function () {
+    return Inertia::render('Carer Dashboard');
+})
+    ->name('dashboard.carer')
+    ->can('care', User::class);
+
 
 Route::get('/test', function () {
     $users = CareTaker::all();
@@ -63,6 +90,7 @@ Route::middleware('breeze')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        
     });
 
     Route::get('/', function () {

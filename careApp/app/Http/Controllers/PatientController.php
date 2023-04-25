@@ -6,6 +6,7 @@ use App\Models\CareTaker;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 use PHPUnit\TextUI\XmlConfiguration\Logging\TeamCity;
 
 class PatientController extends Controller
@@ -15,9 +16,15 @@ class PatientController extends Controller
      */
     public function index()
     {  
-        // $caretakers = Auth::user()->getNearbyCaretakers();
+        // $caretakers = Auth::user()->getCarerTakersInSameCity();
+        // // $caretakerName = $caretakers->isNotEmpty() ? $caretakers->first() : 'Not available';
+
+        // $CaretakerInfo = $caretakers->first();
         
-        // return view('patient.booking', ['city' => $city]);
+        // return Inertia::render('NewBooking', ['CaretakerInfo' => $CaretakerInfo]);
+        // return Inertia::render('New Booking Dashboard');
+        // return view($caretakers);
+        return view('test');
     }
 
     /**
