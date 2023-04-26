@@ -23,6 +23,7 @@ use Inertia\Inertia;
 */
 
 
+
 Route::middleware('auth')->group(function () {
     // Route::get('/patient', [CareTakerController::class, 'index'])->name('dashboard');
     Route::get('/patient/booking', [PatientController::class, 'index'])->name('patient.booking');

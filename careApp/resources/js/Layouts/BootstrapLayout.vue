@@ -8,7 +8,7 @@
     <Navbar />    
 
     
-        <slot />         
+    <slot />         
     
 
 
